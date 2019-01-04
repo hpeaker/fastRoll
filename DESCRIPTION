@@ -1,0 +1,14 @@
+Package: fastRoll
+Type: Package
+Title: Fast Rolling Aggregation using Rcpp
+Version: 0.1
+Date: 2018-12-11
+Author: Harry Peaker
+Maintainer: Harry Peaker <your@email.com>
+Description: Implementations of rolling aggregation functions using Rcpp and simple heuristics for efficient calculation.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.0)
+LinkingTo: Rcpp
+Suggests: 
+    testthat,
+    zoo

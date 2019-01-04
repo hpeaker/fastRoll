@@ -1,0 +1,3 @@
+useDynLib(fastRoll, .registration=TRUE)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
