@@ -1,18 +1,21 @@
 #include <Rcpp.h>
+#include <fastRoll.h>
 
-// Function declaration with export tag 
+using namespace Rcpp;
+using namespace fastRoll;
+
 // [[Rcpp::export]]
-Rcpp::NumericVector
-  rollcor2_cpp(Rcpp::NumericVector x, Rcpp::NumericVector y, int k) {
+NumericVector
+  rollcor_cpp(NumericVector x, NumericVector y, int k) {
     
-    int n = x.size();
-    Rcpp::NumericVector out(n - k + 1);
+    NumericVector Ex = rollmean_cpp(x, k);
+    NumericVector Ey = rollmean_cpp(y, k);
+    NumericVector Exy = rollmean_cpp(x * y, k);
+    NumericVector Exx = rollmean_cpp(x * x, k);
+    NumericVector Eyy = rollmean_cpp(y * y, k);
     
+    NumericVector out = (Exy - Ex * Ey) / (sqrt(Exx - Ex * Ex) * sqrt(Eyy - Ey * Ey));
     
     return out;
   }
-
-
-
-
 

@@ -1,13 +1,16 @@
 #include <Rcpp.h>
+using namespace Rcpp;
+
+// [[Rcpp::interfaces(r, cpp)]]
 
 // Function declaration with export tag 
 // [[Rcpp::export]]
-Rcpp::NumericVector
-rollmean_cpp(Rcpp::NumericVector x, int k) {
+NumericVector
+rollmean_cpp(NumericVector x, int k) {
   
   // Preallocate storage for output vector
   int n = x.size();
-  Rcpp::NumericVector out(n - k + 1);
+  NumericVector out(n - k + 1);
   
   // Calculate the sum for the first rolling window
   double init = 0;
@@ -24,35 +27,6 @@ rollmean_cpp(Rcpp::NumericVector x, int k) {
   // Return the means in each window
   return(out/k);
 }
-
-// [[Rcpp::export]]
-Rcpp::NumericVector
-  rollcor_cpp(Rcpp::NumericVector x, Rcpp::NumericVector y, int k) {
-    
-    Rcpp::NumericVector Ex = rollmean_cpp(x, k);
-    Rcpp::NumericVector Ey = rollmean_cpp(y, k);
-    Rcpp::NumericVector Exy = rollmean_cpp(x * y, k);
-    Rcpp::NumericVector Exx = rollmean_cpp(x * x, k);
-    Rcpp::NumericVector Eyy = rollmean_cpp(y * y, k);
-    
-    Rcpp::NumericVector out = (Exy - Ex * Ey) / (sqrt(Exx - Ex * Ex) * sqrt(Eyy - Ey * Ey));
-    
-    return out;
-  }
-
-
-// [[Rcpp::export]]
-Rcpp::NumericVector
-  rollcov_cpp(Rcpp::NumericVector x, Rcpp::NumericVector y, int k) {
-    
-    Rcpp::NumericVector Ex = rollmean_cpp(x, k);
-    Rcpp::NumericVector Ey = rollmean_cpp(y, k);
-    Rcpp::NumericVector Exy = rollmean_cpp(x * y, k);
-    
-    Rcpp::NumericVector out = Exy - Ex * Ey;
-    
-    return out;
-  }
 
 
 // [[Rcpp::export]]
@@ -80,29 +54,6 @@ Rcpp::NumericVector
   }
 
 
-// [[Rcpp::export]]
-Rcpp::NumericVector
-  rollvar_cpp(Rcpp::NumericVector x, int k) {
-    
-    int n = x.size();
-    
-    Rcpp::NumericVector Exx = rollsum_cpp(x * x, k);
-    Rcpp::NumericVector Ex = rollsum_cpp(x, k);
-    
-    Rcpp::NumericVector out = (Exx - (Ex * Ex)/n)/(n - 1);
-    
-    return out;
-  }
-
-
-// [[Rcpp::export]]
-Rcpp::NumericVector
-  rollsd_cpp(Rcpp::NumericVector x, int k) {
-    
-    Rcpp::NumericVector out = sqrt(rollvar_cpp(x, k));
-    
-    return out;
-  }
 
 
 
