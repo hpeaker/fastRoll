@@ -13,6 +13,6 @@ rollcov_cpp(Rcpp::NumericVector x, Rcpp::NumericVector y, int k) {
   
   Rcpp::NumericVector out = Exy - Ex * Ey;
   
-  return out;
+  return(out * k / (k - 1));
 }
 

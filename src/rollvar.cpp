@@ -19,10 +19,10 @@ rollvar_cpp(NumericVector x, int k) {
 
 // [[Rcpp::export]]
 NumericVector
-  rollsd_cpp(NumericVector x, int k) {
+rollsd_cpp(NumericVector x, int k) {
     
-    NumericVector out = sqrt(rollvar_cpp(x, k));
+  NumericVector out = sqrt(rollvar_cpp(x, k));
     
-    return out;
-  }
+  return out;
+}
 
