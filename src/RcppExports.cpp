@@ -20,16 +20,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _fastRoll_rcpp_hello_world() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
-    return rcpp_result_gen;
-END_RCPP
-}
 // rollcor_cpp
 NumericVector rollcor_cpp(NumericVector x, NumericVector y, int k);
 RcppExport SEXP _fastRoll_rollcor_cpp(SEXP xSEXP, SEXP ySEXP, SEXP kSEXP) {
@@ -245,7 +235,6 @@ RcppExport SEXP _fastRoll_RcppExport_registerCCallable() {
 
 static const R_CallMethodDef CallEntries[] = {
     {"_fastRoll_c2_cpp", (DL_FUNC) &_fastRoll_c2_cpp, 2},
-    {"_fastRoll_rcpp_hello_world", (DL_FUNC) &_fastRoll_rcpp_hello_world, 0},
     {"_fastRoll_rollcor_cpp", (DL_FUNC) &_fastRoll_rollcor_cpp, 3},
     {"_fastRoll_rollcov_cpp", (DL_FUNC) &_fastRoll_rollcov_cpp, 3},
     {"_fastRoll_rollmax_cpp", (DL_FUNC) &_fastRoll_rollmax_cpp, 2},

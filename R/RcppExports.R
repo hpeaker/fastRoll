@@ -5,10 +5,6 @@ c2_cpp <- function(x, y) {
     .Call(`_fastRoll_c2_cpp`, x, y)
 }
 
-rcpp_hello_world <- function() {
-    .Call(`_fastRoll_rcpp_hello_world`)
-}
-
 rollcor_cpp <- function(x, y, k) {
     .Call(`_fastRoll_rollcor_cpp`, x, y, k)
 }
